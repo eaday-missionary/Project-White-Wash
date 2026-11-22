@@ -1,6 +1,8 @@
 # project-white-wash
 
 An Electron application with React and TypeScript
+A local Windows 11 application for Tech Office
+training, resources, and transfer planning.
 
 ## Recommended IDE Setup
 
