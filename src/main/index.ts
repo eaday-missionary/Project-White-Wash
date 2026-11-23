@@ -1,7 +1,51 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import {
+  app,
+  shell,
+  BrowserWindow,
+  ipcMain,
+  type IpcMainEvent,
+  type IpcMainInvokeEvent
+} from 'electron'
+
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+
+function getRequestWindow(event: IpcMainEvent | IpcMainInvokeEvent): BrowserWindow | null {
+  const requestWindow = BrowserWindow.fromWebContents(event.sender)
+
+  if (!requestWindow || event.senderFrame !== requestWindow.webContents.mainFrame) {
+    return null
+  }
+
+  return requestWindow
+}
+
+function registerWindowControls(): void {
+  ipcMain.on('window:minimize', (event) => {
+    getRequestWindow(event)?.minimize()
+  })
+
+  ipcMain.on('window:toggle-maximize', (event) => {
+    const window = getRequestWindow(event)
+
+    if (!window) return
+
+    if (window.isMaximized()) {
+      window.unmaximize()
+    } else {
+      window.maximize()
+    }
+  })
+
+  ipcMain.on('window:close', (event) => {
+    getRequestWindow(event)?.close()
+  })
+
+  ipcMain.handle('window:is-maximized', (event) => {
+    return getRequestWindow(event)?.isMaximized() ?? false
+  })
+}
 
 function createWindow(): void {
   // Create the browser window.
@@ -12,12 +56,22 @@ function createWindow(): void {
     minHeight: 600,
     title: 'Project White Wash',
     show: false,
+    frame: false,
     autoHideMenuBar: true,
+
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
     }
+  })
+
+  mainWindow.on('maximize', () => {
+    mainWindow.webContents.send('window:maximized-change', true)
+  })
+
+  mainWindow.on('unmaximize', () => {
+    mainWindow.webContents.send('window:maximized-change', false)
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -54,6 +108,8 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  registerWindowControls()
 
   createWindow()
 

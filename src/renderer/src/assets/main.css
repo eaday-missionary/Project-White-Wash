@@ -51,10 +51,14 @@ button:focus-visible {
    Main Application Layout
 =================================== */
 
+
 .app-shell {
   display: flex;
-  min-height: 100vh;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
+
 
 .main-content {
   flex: 1;
@@ -316,3 +320,138 @@ button:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+/* ===================================
+   CUSTOM APPLICATION WINDOW
+=================================== */
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+.desktop-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: var(--background);
+}
+
+/* ===================================
+   Custom Title Bar
+=================================== */
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 44px;
+  flex-shrink: 0;
+
+  background: #111b2d;
+  border-bottom: 1px solid var(--border);
+
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.titlebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 16px;
+
+  pointer-events: none;
+}
+
+.titlebar-logo {
+  display: grid;
+  place-items: center;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 6px;
+  background: #304d78;
+  color: white;
+
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.titlebar-name {
+  color: #dfe8fa;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* ===================================
+   Window Control Buttons
+=================================== */
+
+.titlebar-controls {
+  display: flex;
+  height: 100%;
+
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-button {
+  display: grid;
+  place-items: center;
+
+  width: 48px;
+  height: 100%;
+
+  border: none;
+  border-radius: 0;
+
+  background: transparent;
+  color: #dae4f5;
+
+  font-size: 19px;
+  line-height: 1;
+
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-button:hover {
+  background: #293d5d;
+}
+
+.titlebar-button:active {
+  background: #355178;
+}
+
+.titlebar-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+
+.titlebar-close:hover {
+  background: #c42b36;
+  color: white;
+}
+
+.titlebar-close:active {
+  background: #a9232c;
+}
+
+/* ===================================
+   Scrollable Application Content
+=================================== */
+
+.sidebar {
+  overflow-y: auto;
+}
+
+.main-content {
+  overflow-y: auto;
+}
+

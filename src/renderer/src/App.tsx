@@ -4,6 +4,7 @@ import Sidebar, { type PageId } from './components/Sidebar'
 
 import DashboardPage from './pages/DashboardPage'
 import PlaceholderPage from './pages/PlaceholderPage'
+import TitleBar from './components/TitleBar'
 
 const pageDetails: Record<Exclude<PageId, 'dashboard'>, { title: string; description: string }> = {
   planner: {
@@ -24,20 +25,24 @@ function App(): JSX.Element {
   const [currentPage, setCurrentPage] = useState<PageId>('dashboard')
 
   return (
-    <div className="app-shell">
-      <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
+    <div className="desktop-app">
+      <TitleBar />
 
-      <main className="main-content">
-        {currentPage === 'dashboard' ? (
-          <DashboardPage onNavigate={setCurrentPage} />
-        ) : (
-          <PlaceholderPage
-            title={pageDetails[currentPage].title}
-            description={pageDetails[currentPage].description}
-            onReturn={() => setCurrentPage('dashboard')}
-          />
-        )}
-      </main>
+      <div className="app-shell">
+        <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
+
+        <main className="main-content">
+          {currentPage === 'dashboard' ? (
+            <DashboardPage onNavigate={setCurrentPage} />
+          ) : (
+            <PlaceholderPage
+              title={pageDetails[currentPage].title}
+              description={pageDetails[currentPage].description}
+              onReturn={() => setCurrentPage('dashboard')}
+            />
+          )}
+        </main>
+      </div>
     </div>
   )
 }
