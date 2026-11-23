@@ -1,34 +1,44 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import { useState, type JSX } from 'react'
 
-function App(): React.JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+import Sidebar, { type PageId } from './components/Sidebar'
+
+import DashboardPage from './pages/DashboardPage'
+import PlaceholderPage from './pages/PlaceholderPage'
+
+const pageDetails: Record<Exclude<PageId, 'dashboard'>, { title: string; description: string }> = {
+  planner: {
+    title: 'Transfer Planner',
+    description: 'Organize and manage transfers.'
+  },
+  tutorials: {
+    title: 'Tutorials',
+    description: 'Training videos and office procedures.'
+  },
+  software: {
+    title: 'Software',
+    description: 'Essential tools and application resources.'
+  }
+}
+
+function App(): JSX.Element {
+  const [currentPage, setCurrentPage] = useState<PageId>('dashboard')
 
   return (
-    <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
-          </a>
-        </div>
-      </div>
-      <Versions></Versions>
-    </>
+    <div className="app-shell">
+      <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
+
+      <main className="main-content">
+        {currentPage === 'dashboard' ? (
+          <DashboardPage onNavigate={setCurrentPage} />
+        ) : (
+          <PlaceholderPage
+            title={pageDetails[currentPage].title}
+            description={pageDetails[currentPage].description}
+            onReturn={() => setCurrentPage('dashboard')}
+          />
+        )}
+      </main>
+    </div>
   )
 }
 

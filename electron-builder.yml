@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: project-white-wash
+productName: Project White Wash
 directories:
   buildResources: build
 files:
