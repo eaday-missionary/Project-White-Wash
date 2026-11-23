@@ -1,0 +1,84 @@
+
+[
+  {
+    "id": "welcome",
+    "title": "Welcome to the Tech Office",
+    "category": "Getting Started",
+    "summary": "An introduction to Project White Wash and the Tech Office.",
+    "estimatedMinutes": 5,
+    "steps": [
+      {
+        "title": "Introduction",
+        "body": "Welcome to the Tech Office. Project White Wash is designed to keep important training materials, resources, and planning tools in one place."
+      },
+      {
+        "title": "Explore the Application",
+        "body": "Use the sidebar to navigate between the Dashboard, Transfer Planner, Tutorials, and Software sections."
+      },
+      {
+        "title": "Continue Learning",
+        "body": "Open the tutorial library to find instructions for common tasks. This introductory tutorial is sample content and can be replaced with your official training material."
+      }
+    ]
+  },
+  {
+    "id": "organizing-files",
+    "title": "Organizing Office Files",
+    "category": "Procedures",
+    "summary": "Basic guidelines for keeping your workspace organized.",
+    "estimatedMinutes": 8,
+    "steps": [
+      {
+        "title": "Create a Folder Structure",
+        "body": "Use clearly named folders to keep approved documents organized by subject or purpose."
+      },
+      {
+        "title": "Use Consistent File Names",
+        "body": "Choose descriptive file names so information is easy to locate later."
+      },
+      {
+        "title": "Protect Sensitive Information",
+        "body": "Store confidential records only in approved locations and follow your organization's data-handling procedures."
+      }
+    ]
+  },
+  {
+    "id": "using-resources",
+    "title": "Finding Essential Software",
+    "category": "Software",
+    "summary": "Learn to use the software resources directory.",
+    "estimatedMinutes": 4,
+    "steps": [
+      {
+        "title": "Open the Software Section",
+        "body": "Select Software from the Project White Wash sidebar."
+      },
+      {
+        "title": "Find a Resource",
+        "body": "Browse the available software entries and read their descriptions."
+      },
+      {
+        "title": "Open the Official Website",
+        "body": "Click Open Website to launch an approved resource in your default browser. Internet access may be required."
+      }
+    ]
+  },
+  {
+    "id": "phone-setup",
+    "title": "New Missionary Phone Setup",
+    "category": "Transfer week",
+    "summary": "A basic guide for setting up a new missionary phone.",
+    "estimatedMinutes": 5,
+    "videoFile" : "How to Send Mass Text.mp4",
+    "steps": [
+      {
+        "title": "Setup",
+        "body": "Below is a video guide, as well as a slideshow with instructions on how to install MaaS on a new missionary phone."
+      },
+      {
+        "title": "Slideshow:",
+        "body": "https:examplelink.com"
+      }
+    ]
+  }
+]
