@@ -1,0 +1,258 @@
+
+/* ===================================
+   PROJECT WHITE WASH — UI LIBRARY
+=================================== */
+
+/* Buttons */
+
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ui-button--primary {
+  background: #416bb0;
+  color: white;
+}
+
+.ui-button--primary:hover:not(:disabled) {
+  background: #527ec7;
+}
+
+.ui-button--secondary {
+  background: transparent;
+  border-color: #526784;
+  color: var(--text-primary);
+}
+
+.ui-button--secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+}
+
+.ui-button--danger {
+  background: #983641;
+  color: white;
+}
+
+.ui-button--danger:hover:not(:disabled) {
+  background: #b54550;
+}
+
+.ui-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Cards */
+
+.ui-card {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.ui-card-header {
+  margin-bottom: 20px;
+}
+
+.ui-card-header h2 {
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.ui-card-header p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ui-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Text Fields and Dropdowns */
+
+.ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+}
+
+.ui-field label {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ui-input,
+.ui-select {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 13px;
+
+  background: #0b1423;
+  color: var(--text-primary);
+
+  border: 1px solid #3a4f6c;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+
+  color-scheme: dark;
+}
+
+.ui-input::placeholder {
+  color: #7b8da8;
+}
+
+.ui-input:focus,
+.ui-select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.ui-field-hint {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+/* Tabs */
+
+.ui-tabs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 5px;
+  background: #0b1423;
+  border-radius: 9px;
+}
+
+.ui-tabs-list button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.ui-tabs-list button:hover {
+  background: var(--surface-hover);
+}
+
+.ui-tabs-list button[aria-selected="true"] {
+  background: #2c456d;
+  color: white;
+}
+
+.ui-tabs-panel {
+  padding: 18px 4px 4px;
+  min-height: 70px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Modal Dialog */
+
+.ui-modal {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 26px;
+
+  background: #17253a;
+  color: var(--text-primary);
+  border: 1px solid #455d7e;
+  border-radius: 14px;
+
+  box-shadow: 0 20px 70px #0008;
+}
+
+.ui-modal::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.ui-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ui-modal-header h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.ui-modal-close {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 24px;
+}
+
+.ui-modal-close:hover {
+  background: #a13542;
+  color: white;
+}
+
+.ui-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: 18px;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Component Playground */
+
+.ui-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ui-inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ui-preview-text {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1100px) {
+  .ui-demo-grid {
+    grid-template-columns: 1fr;
+  }
+}

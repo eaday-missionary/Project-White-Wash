@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
 
-export type PageId = 'dashboard' | 'planner' | 'tutorials' | 'software'
+export type PageId = 'dashboard' | 'planner' | 'tutorials' | 'software' | 'playground'
 
 type SidebarProps = {
   currentPage: PageId
@@ -11,7 +11,8 @@ const menuItems: { id: PageId; label: string }[] = [
   { id: 'dashboard', label: 'Dashboard' },
   { id: 'planner', label: 'Transfer Planner' },
   { id: 'tutorials', label: 'Tutorials' },
-  { id: 'software', label: 'Software' }
+  { id: 'software', label: 'Software' },
+  { id: 'playground', label: 'UI Playground' }
 ]
 
 export default function Sidebar({ currentPage, onNavigate }: SidebarProps): JSX.Element {
