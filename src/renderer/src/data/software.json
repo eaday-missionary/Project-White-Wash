@@ -1,0 +1,24 @@
+
+[
+  {
+    "id": "vscode",
+    "name": "Visual Studio Code",
+    "category": "Development",
+    "description": "A code editor used for developing and maintaining Project White Wash.",
+    "url": "https://code.visualstudio.com/"
+  },
+  {
+    "id": "git",
+    "name": "Git",
+    "category": "Development",
+    "description": "Version control software for tracking changes to project files.",
+    "url": "https://git-scm.com/"
+  },
+  {
+    "id": "nodejs",
+    "name": "Node.js",
+    "category": "Development",
+    "description": "The JavaScript runtime needed by our Electron development tools.",
+    "url": "https://nodejs.org/en"
+  }
+]

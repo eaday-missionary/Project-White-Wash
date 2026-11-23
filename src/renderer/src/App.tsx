@@ -6,22 +6,16 @@ import DashboardPage from './pages/DashboardPage'
 import PlaceholderPage from './pages/PlaceholderPage'
 import TitleBar from './components/TitleBar'
 import UIPlaygroundPage from './pages/UIPlaygroundPage'
+import TutorialsPage from './pages/TutorialsPage'
+import SoftwarePage from './pages/SoftwarePage'
 
 const pageDetails: Record<
-  Exclude<PageId, 'dashboard' | 'playground'>,
+  Exclude<PageId, 'dashboard' | 'playground' | 'tutorials' | 'software'>,
   { title: string; description: string }
 > = {
   planner: {
     title: 'Transfer Planner',
     description: 'Organize and manage transfers.'
-  },
-  tutorials: {
-    title: 'Tutorials',
-    description: 'Training videos and office procedures.'
-  },
-  software: {
-    title: 'Software',
-    description: 'Essential tools and application resources.'
   }
 }
 
@@ -40,6 +34,10 @@ function App(): JSX.Element {
             <DashboardPage onNavigate={setCurrentPage} />
           ) : currentPage === 'playground' ? (
             <UIPlaygroundPage />
+          ) : currentPage === 'tutorials' ? (
+            <TutorialsPage />
+          ) : currentPage === 'software' ? (
+            <SoftwarePage />
           ) : (
             <PlaceholderPage
               title={pageDetails[currentPage].title}

@@ -1,0 +1,179 @@
+
+/* ===================================
+   PROJECT WHITE WASH — RESOURCES
+=================================== */
+
+.resource-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr);
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.resource-category {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.resource-muted {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Tutorial Library */
+
+.tutorial-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.5fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.tutorial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tutorial-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  width: 100%;
+
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  background: #101b2d;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.tutorial-option:hover {
+  background: var(--surface-hover);
+}
+
+.tutorial-option.selected {
+  background: #213957;
+  border-color: #6386ba;
+}
+
+.tutorial-option strong {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tutorial-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tutorial-content h3 {
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.tutorial-step {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #101b2d;
+}
+
+.tutorial-step summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.tutorial-step summary:hover {
+  background: var(--surface-hover);
+}
+
+.tutorial-step[open] summary {
+  background: #213653;
+}
+
+.step-number {
+  color: var(--accent);
+  font-size: 11px;
+}
+
+.step-body {
+  padding: 18px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.tutorial-video-section {
+  margin-top: 18px;
+}
+
+.tutorial-video {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  border-radius: 10px;
+  background: #05080d;
+}
+
+/* Software Directory */
+
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.resource-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+
+  min-height: 40px;
+  padding: 10px 16px;
+  border-radius: 8px;
+
+  background: #416bb0;
+  color: white;
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.resource-action:hover {
+  background: #527ec7;
+}
+
+.resource-action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1100px) {
+  .tutorial-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .resource-filters,
+  .software-grid {
+    grid-template-columns: 1fr;
+  }
+}
