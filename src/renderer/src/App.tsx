@@ -5,8 +5,12 @@ import Sidebar, { type PageId } from './components/Sidebar'
 import DashboardPage from './pages/DashboardPage'
 import PlaceholderPage from './pages/PlaceholderPage'
 import TitleBar from './components/TitleBar'
+import UIPlaygroundPage from './pages/UIPlaygroundPage'
 
-const pageDetails: Record<Exclude<PageId, 'dashboard'>, { title: string; description: string }> = {
+const pageDetails: Record<
+  Exclude<PageId, 'dashboard' | 'playground'>,
+  { title: string; description: string }
+> = {
   planner: {
     title: 'Transfer Planner',
     description: 'Organize and manage transfers.'
@@ -34,6 +38,8 @@ function App(): JSX.Element {
         <main className="main-content">
           {currentPage === 'dashboard' ? (
             <DashboardPage onNavigate={setCurrentPage} />
+          ) : currentPage === 'playground' ? (
+            <UIPlaygroundPage />
           ) : (
             <PlaceholderPage
               title={pageDetails[currentPage].title}
