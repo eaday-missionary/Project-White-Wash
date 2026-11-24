@@ -32,6 +32,15 @@ const api = {
       return (): void => {
         ipcRenderer.removeListener('window:maximized-change', listener)
       }
+    },
+  },
+  content: {
+    load: (): Promise<unknown> => {
+      return ipcRenderer.invoke('content:load')
+    },
+
+    save: (content: unknown): Promise<void> => {
+      return ipcRenderer.invoke('content:save', content)
     }
   }
 }

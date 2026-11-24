@@ -4,24 +4,29 @@ import Card from '../components/ui/Card'
 import TextField from '../components/ui/TextField'
 import SelectField from '../components/ui/SelectField'
 
-import tutorialData from '../data/tutorials.json'
 import type { Tutorial } from '../types/resources'
 
-const tutorials: Tutorial[] = tutorialData
+// Define the information this component receives
+type TutorialsPageProps = {
+  tutorials: Tutorial[]
+}
 
-const categoryOptions = [
-  { value: 'all', label: 'All categories' },
-  ...Array.from(new Set(tutorials.map((t) => t.category))).map((category) => ({
-    value: category,
-    label: category
-  }))
-]
+export default function TutorialsPage({ tutorials }: TutorialsPageProps): JSX.Element {
+  // Generate category options from the current tutorials
+  const categoryOptions = [
+    { value: 'all', label: 'All categories' },
+    ...Array.from(new Set(tutorials.map((t) => t.category))).map((category) => ({
+      value: category,
+      label: category
+    }))
+  ]
 
-export default function TutorialsPage(): JSX.Element {
+  // Remember user selections
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('all')
   const [selectedId, setSelectedId] = useState<string | null>(tutorials[0]?.id ?? null)
 
+  // Filter the current tutorials
   const filteredTutorials = tutorials.filter((tutorial) => {
     const matchesCategory = category === 'all' || tutorial.category === category
 
@@ -34,6 +39,8 @@ export default function TutorialsPage(): JSX.Element {
 
     return matchesCategory && matchesSearch
   })
+
+  // Keep the rest of your existing code below this point.
 
   const selectedTutorial =
     filteredTutorials.find((tutorial) => tutorial.id === selectedId) ?? filteredTutorials[0]

@@ -1,6 +1,6 @@
 import type { JSX } from 'react'
 
-export type PageId = 'dashboard' | 'planner' | 'tutorials' | 'software' | 'playground'
+export type PageId = 'dashboard' | 'planner' | 'tutorials' | 'software' | 'playground' | 'editor'
 
 type SidebarProps = {
   currentPage: PageId
@@ -12,6 +12,7 @@ const menuItems: { id: PageId; label: string }[] = [
   { id: 'planner', label: 'Transfer Planner' },
   { id: 'tutorials', label: 'Tutorials' },
   { id: 'software', label: 'Software' },
+  { id: 'editor', label: 'Content Editor' },
   { id: 'playground', label: 'UI Playground' }
 ]
 

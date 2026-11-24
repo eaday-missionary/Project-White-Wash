@@ -1,4 +1,5 @@
 import type { ElectronAPI } from '@electron-toolkit/preload'
+import type { AppContent } from '../renderer/src/types/resources'
 
 declare global {
   interface Window {
@@ -9,10 +10,13 @@ declare global {
         minimize: () => void
         toggleMaximize: () => void
         close: () => void
-
         isMaximized: () => Promise<boolean>
-
         onMaximizeChange: (callback: (isMaximized: boolean) => void) => () => void
+      }
+
+      content: {
+        load: () => Promise<AppContent | null>
+        save: (content: AppContent) => Promise<void>
       }
     }
   }
