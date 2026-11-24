@@ -4,22 +4,25 @@ import Card from '../components/ui/Card'
 import TextField from '../components/ui/TextField'
 import SelectField from '../components/ui/SelectField'
 
-import softwareData from '../data/software.json'
 import type { SoftwareResource } from '../types/resources'
 
-const software: SoftwareResource[] = softwareData
+type SoftwarePageProps = {
+  software: SoftwareResource[]
+}
 
-const categoryOptions = [
-  { value: 'all', label: 'All categories' },
-  ...Array.from(new Set(software.map((item) => item.category))).map((category) => ({
-    value: category,
-    label: category
-  }))
-]
+export default function SoftwarePage({ software }: SoftwarePageProps): JSX.Element {
+  const categoryOptions = [
+    { value: 'all', label: 'All categories' },
+    ...Array.from(new Set(software.map((item) => item.category))).map((category) => ({
+      value: category,
+      label: category
+    }))
+  ]
 
-export default function SoftwarePage(): JSX.Element {
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('all')
+
+  // Keep your existing filtering logic and JSX below.
 
   const filteredSoftware = software.filter((item) => {
     const query = search.trim().toLowerCase()

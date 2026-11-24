@@ -20,3 +20,8 @@ export type SoftwareResource = {
   description: string
   url: string
 }
+
+export type AppContent = {
+  tutorials: Tutorial[]
+  software: SoftwareResource[]
+}

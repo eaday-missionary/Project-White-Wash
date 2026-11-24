@@ -11,6 +11,9 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+import { registerContentHandlers } from './contentStore'
+
+
 function getRequestWindow(event: IpcMainEvent | IpcMainInvokeEvent): BrowserWindow | null {
   const requestWindow = BrowserWindow.fromWebContents(event.sender)
 
@@ -95,6 +98,9 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+
+app.setName('Project White Wash')
+
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
@@ -112,6 +118,8 @@ app.whenReady().then(() => {
   registerWindowControls()
 
   createWindow()
+
+  registerContentHandlers()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
