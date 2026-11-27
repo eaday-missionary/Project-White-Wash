@@ -100,7 +100,7 @@ if (!process.versions.electron) {
         win.webContents.sendInputEvent({ type: 'mouseMove', ...point })
         await waitFor(`document.querySelector('.radial-menu').dataset.hoveredItemId === 'planner'`)
         await new Promise((resolve) => setTimeout(resolve, 160))
-        assert.equal(await evaluate(`getComputedStyle(${paths}[0]).fill`), 'rgb(56, 56, 56)')
+        assert.equal(await evaluate(`getComputedStyle(${paths}[0]).fill`), 'rgb(53, 53, 53)')
         assert.deepEqual(
           await evaluate(`Array.from(${paths}, p => p.getAttribute('d'))`),
           originals

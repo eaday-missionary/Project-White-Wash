@@ -1,4 +1,4 @@
-import { lazy, Suspense, useMemo, type ReactNode, type JSX } from 'react'
+import { lazy, Suspense, useMemo, useState, type ReactNode, type JSX } from 'react'
 import { RadialMenu } from '../components/RadialMenu'
 import type { RadialMenuItem } from '../components/RadialMenu'
 import type { PageId } from '../components/Sidebar'
@@ -75,6 +75,7 @@ const features: {
 ]
 
 export default function DashboardPage({ onNavigate }: DashboardProps): JSX.Element {
+  const [hubBrushesEnabled, setHubBrushesEnabled] = useState(true)
   const items = useMemo<RadialMenuItem[]>(
     () =>
       features.map((feature, index) => ({
@@ -107,12 +108,23 @@ export default function DashboardPage({ onNavigate }: DashboardProps): JSX.Eleme
     <RadialMenu
       items={items}
       label="Quick Access"
+      hubScale={0.7}
+      hubBrushes={hubBrushesEnabled}
       hub={
         <header className="dashboard-hub-copy">
           <p>YOUR WORKSPACE</p>
           <h1>Dashboard</h1>
           <p>Welcome to Project White Wash. Your Tech Office tools in one place.</p>
           <h2>Quick Access</h2>
+          <button
+            type="button"
+            className="dashboard-brush-toggle"
+            aria-label="Center brushes"
+            aria-pressed={hubBrushesEnabled}
+            onClick={() => setHubBrushesEnabled((enabled) => !enabled)}
+          >
+            Center brushes: {hubBrushesEnabled ? 'On' : 'Off'}
+          </button>
         </header>
       }
     />

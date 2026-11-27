@@ -35,10 +35,15 @@ export function rectangleIntersection(width: number, height: number, angle: numb
   return { x: width / 2 + dx * distance, y: height / 2 + dy * distance }
 }
 
-export function createSegments(ids: string[], width: number, height: number): SegmentGeometry[] {
+export function createSegments(
+  ids: string[],
+  width: number,
+  height: number,
+  hubScale = 1
+): SegmentGeometry[] {
   if (!ids.length || width <= 0 || height <= 0) return []
   const center = { x: width / 2, y: height / 2 }
-  const innerRadius = Math.min(160, Math.min(width, height) * 0.22)
+  const innerRadius = Math.min(160, Math.min(width, height) * 0.22) * hubScale
   const step = TAU / ids.length
   const corners = [
     { x: 0, y: 0 },

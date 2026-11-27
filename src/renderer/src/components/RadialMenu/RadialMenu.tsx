@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState, type JSX } from 'react'
 import { createSegments } from './radialGeometry'
 import { RadialSegment } from './RadialSegment'
 import { RadialHub } from './RadialHub'
+import { BrushEffects } from './BrushEffects'
+import { HubBrushEffects } from './HubBrushEffects'
 import { useElementSize } from './useElementSize'
 import type { RadialMenuProps } from './radialMenu.types'
 import './RadialMenu.css'
@@ -11,6 +13,8 @@ export function RadialMenu({
   label = 'Quick Access',
   hub,
   hubLabel,
+  hubScale = 1,
+  hubBrushes = false,
   onHubSelect,
   onGeometryChange,
   onHoverChange
@@ -23,13 +27,17 @@ export function RadialMenu({
   // Geometry depends only on ordered IDs and size, never on hover or callbacks.
   const ids = JSON.stringify(visible.map((item) => item.id))
   const geometry = useMemo(
-    () => createSegments(JSON.parse(ids), width, height),
-    [ids, width, height]
+    () => createSegments(JSON.parse(ids), width, height, hubScale),
+    [ids, width, height, hubScale]
   )
   const [hoveredId, setHoveredId] = useState<string | null>(null)
+  const [focusedId, setFocusedId] = useState<string | null>(null)
   const activeHover = visible.some((item) => item.id === hoveredId && !item.disabled)
     ? hoveredId
     : null
+  const activeId =
+    activeHover ??
+    (visible.some((item) => item.id === focusedId && !item.disabled) ? focusedId : null)
   const updateHover = useCallback((id: string | null) => setHoveredId(id), [])
   useEffect(() => {
     onGeometryChange?.(geometry)
@@ -45,6 +53,10 @@ export function RadialMenu({
         height={height}
         role="group"
         aria-label={label}
+        onFocus={(event) => setFocusedId((event.target as SVGElement).dataset.itemId ?? null)}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocusedId(null)
+        }}
         onPointerOver={(event) => {
           const target = event.target as SVGElement
           const id = target.dataset.itemId
@@ -80,12 +92,14 @@ export function RadialMenu({
             item={visible[index]}
             geometry={segment}
             count={visible.length}
+            active={segment.itemId === activeId}
           />
         ))}
       </svg>
-      <div className="radial-effects" aria-hidden="true" />
+      <BrushEffects geometry={geometry} activeId={activeId} />
+      {hubBrushes && <HubBrushEffects segment={geometry[0]} />}
       <RadialHub
-        diameter={(geometry[0]?.innerRadius ?? Math.min(width, height) * 0.22) * 2}
+        diameter={(geometry[0]?.innerRadius ?? Math.min(width, height) * 0.22 * hubScale) * 2}
         label={hubLabel}
         onSelect={onHubSelect}
       >

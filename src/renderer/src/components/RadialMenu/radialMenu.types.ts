@@ -17,6 +17,8 @@ export interface RadialMenuProps {
   label?: string
   hub?: ReactNode
   hubLabel?: string
+  hubScale?: number
+  hubBrushes?: boolean
   onHubSelect?: () => void
   onGeometryChange?: (geometry: SegmentGeometry[]) => void
   onHoverChange?: (itemId: string | null) => void

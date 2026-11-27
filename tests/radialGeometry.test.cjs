@@ -76,3 +76,44 @@ test('all counts and aspect ratios cover rectangle and leave circular hub', () =
     }
   }
 })
+
+const {
+  outlineMetrics,
+  chooseBrushes
+} = require('../src/renderer/src/components/RadialMenu/brushGeometry.ts')
+
+test('brush outline follows straight edges without the central arc', () => {
+  for (let count = 1; count <= 12; count++) {
+    for (const segment of createSegments(
+      Array.from({ length: count }, (_, i) => String(i)),
+      950,
+      756
+    )) {
+      const outline = outlineMetrics(segment)
+      let straight = 0
+      for (let i = 1; i < segment.boundaryPoints.length; i++) {
+        const a = segment.boundaryPoints[i - 1],
+          b = segment.boundaryPoints[i]
+        const point = outline.sample(straight)
+        assert.ok(Math.hypot(point.x - a.x, point.y - a.y) < 1e-6)
+        straight += Math.hypot(b.x - a.x, b.y - a.y)
+      }
+      assert.ok(Math.abs(outline.length - straight) < 1e-6)
+      const first = outline.sample(0),
+        last = outline.sample(outline.length)
+      assert.ok(Math.hypot(first.x - segment.innerStart.x, first.y - segment.innerStart.y) < 1e-6)
+      assert.ok(Math.hypot(last.x - segment.innerEnd.x, last.y - segment.innerEnd.y) < 1e-6)
+    }
+  }
+})
+
+test('each brush selection contains four or five distinct source textures', () => {
+  for (let i = 0; i < 100; i++) {
+    const selection = chooseBrushes(8)
+    assert.ok([4, 5].includes(selection.length))
+    assert.equal(new Set(selection).size, selection.length)
+    assert.ok(selection.every((index) => index >= 0 && index < 8))
+  }
+  assert.equal(chooseBrushes(8, () => 0.1).length, 4)
+  assert.equal(chooseBrushes(8, () => 0.9).length, 5)
+})
