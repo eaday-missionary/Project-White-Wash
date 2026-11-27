@@ -116,7 +116,11 @@ function App(): JSX.Element {
       <div className="app-shell">
         <Sidebar currentPage={currentPage} onNavigate={setCurrentPage} />
 
-        <main className="main-content">{renderPage()}</main>
+        <main
+          className={`main-content${currentPage === 'dashboard' ? ' main-content--dashboard' : ''}`}
+        >
+          {renderPage()}
+        </main>
       </div>
     </div>
   )

@@ -1,0 +1,38 @@
+.main-content.main-content--dashboard {
+  padding: 0;
+  overflow: hidden;
+}
+.dashboard-hub-copy {
+  width: 100%;
+}
+.dashboard-hub-copy p {
+  line-height: 1.45;
+  margin: 0.6em 0;
+}
+.dashboard-hub-copy p:first-child {
+  font-size: 0.75em;
+  letter-spacing: 0.12em;
+}
+.dashboard-hub-copy h1 {
+  margin: 0;
+  font-size: 2em;
+}
+.dashboard-hub-copy h2 {
+  margin: 0.6em 0 0;
+  font-size: 1em;
+  font-weight: normal;
+}
+.dashboard-brush-toggle {
+  margin-top: 0.8em;
+  padding: 0.4em 0.8em;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: #272727;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.dashboard-brush-toggle:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}

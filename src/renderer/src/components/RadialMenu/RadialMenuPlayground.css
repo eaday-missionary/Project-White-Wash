@@ -1,0 +1,25 @@
+.radial-playground {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #202020;
+}
+.radial-playground-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  color: #ddd;
+}
+.radial-playground-controls button {
+  padding: 6px 12px;
+}
+.radial-playground-preview {
+  flex: 1;
+  min-height: 150px;
+  width: 100%;
+  resize: both;
+  overflow: hidden;
+  border: 1px solid #666;
+}
