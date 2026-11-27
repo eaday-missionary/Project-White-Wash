@@ -29,7 +29,9 @@ body,
 #root {
   width: 100%;
   min-height: 100%;
+  height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 
 body {
@@ -53,6 +55,7 @@ button:focus-visible {
 
 
 .app-shell {
+  position: relative;
   display: flex;
   flex: 1;
   min-height: 0;
@@ -61,24 +64,69 @@ button:focus-visible {
 
 
 .main-content {
+  container-type: inline-size;
   flex: 1;
   min-width: 0;
-  padding: 50px 60px;
+  padding: 76px 60px 50px;
+  overflow-y: auto;
 }
 
 /* ===================================
    Sidebar
 =================================== */
 
-.sidebar {
-  width: 250px;
+.sidebar-menu {
+  width: 0;
   flex-shrink: 0;
+  min-height: 0;
+  z-index: 10;
+  pointer-events: none;
+  -webkit-app-region: no-drag;
+}
+
+.sidebar-menu--open {
+  width: min(280px, 45vw);
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--sidebar);
+  color: var(--text-primary);
+  pointer-events: auto;
+}
+
+.sidebar-home {
+  left: 64px;
+}
+
+.sidebar-toggle:hover {
+  background: var(--surface-hover);
+}
+
+.sidebar[hidden] {
+  display: none;
+}
+
+.sidebar {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
   background: var(--sidebar);
   border-right: 1px solid var(--border);
-  padding: 28px 16px;
+  padding: 76px 16px 28px;
 
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .brand {
@@ -294,17 +342,8 @@ button:focus-visible {
   font-size: 14px;
 }
 
-.primary-button {
+.placeholder-card .ui-button {
   margin-top: 20px;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 8px;
-  background: #365c99;
-  color: white;
-}
-
-.primary-button:hover {
-  background: #4671b6;
 }
 
 /* ===================================
@@ -313,11 +352,20 @@ button:focus-visible {
 
 @media (max-width: 1050px) {
   .main-content {
-    padding: 35px;
+    padding: 76px 35px 35px;
   }
 
+}
+
+@container (max-width: 800px) {
   .feature-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (max-width: 500px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -325,13 +373,6 @@ button:focus-visible {
 /* ===================================
    CUSTOM APPLICATION WINDOW
 =================================== */
-
-html,
-body,
-#root {
-  height: 100%;
-  overflow: hidden;
-}
 
 .desktop-app {
   display: flex;
@@ -442,16 +483,3 @@ body,
 .titlebar-close:active {
   background: #a9232c;
 }
-
-/* ===================================
-   Scrollable Application Content
-=================================== */
-
-.sidebar {
-  overflow-y: auto;
-}
-
-.main-content {
-  overflow-y: auto;
-}
-

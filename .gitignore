@@ -17,5 +17,8 @@ out
 # Local development data
 /local-data/
 
+# Local public assets
+/src/renderer/public/
+
 #other
 Project notes.txt

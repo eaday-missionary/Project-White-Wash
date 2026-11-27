@@ -1,10 +1,7 @@
-export const brushUrls = Object.values(
-  import.meta.glob('../../../images/brush*.png', {
-    eager: true,
-    query: '?url',
-    import: 'default'
-  })
-) as string[]
+export const brushUrls = Array.from(
+  { length: 10 },
+  (_, index) => `${import.meta.env.BASE_URL}images/brush${index + 1}.png`
+)
 
 let brushes: Promise<HTMLImageElement[]> | undefined
 

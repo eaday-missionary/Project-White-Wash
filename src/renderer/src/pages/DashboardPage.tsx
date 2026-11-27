@@ -2,6 +2,7 @@ import { lazy, Suspense, useMemo, useState, type ReactNode, type JSX } from 'rea
 import { RadialMenu } from '../components/RadialMenu'
 import type { RadialMenuItem } from '../components/RadialMenu'
 import type { PageId } from '../components/Sidebar'
+import { additionalPages } from '../data/placeholderPages'
 import './DashboardPage.css'
 
 const DevelopmentPlayground = import.meta.env.DEV
@@ -71,7 +72,43 @@ const features: {
         </>
       </svg>
     )
-  }
+  },
+  {
+    id: 'playground',
+    title: 'UI Playground',
+    description: 'Explore interface components.',
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden="true"
+      >
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <path d="M14 17.5h7m-3.5-3.5v7" />
+      </svg>
+    )
+  },
+  ...Object.entries(additionalPages).map(([id, title]) => ({
+    id: id as PageId,
+    title,
+    description: 'Coming soon.',
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden="true"
+      >
+        <rect x="4" y="3" width="16" height="18" rx="2" />
+        <path d="M8 8h8M8 12h8M8 16h5" />
+      </svg>
+    )
+  }))
 ]
 
 export default function DashboardPage({ onNavigate }: DashboardProps): JSX.Element {

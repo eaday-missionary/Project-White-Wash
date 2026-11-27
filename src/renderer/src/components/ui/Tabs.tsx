@@ -23,7 +23,7 @@ export default function Tabs({ label, items, value, onChange }: TabsProps): JSX.
   const selectedItem = items[selectedIndex]
 
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number): void {
-    let nextIndex = index
+    let nextIndex: number
 
     if (event.key === 'ArrowRight') {
       nextIndex = (index + 1) % items.length

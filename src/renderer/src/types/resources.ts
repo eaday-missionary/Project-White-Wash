@@ -1,6 +1,8 @@
 export type TutorialStep = {
   title: string
   body: string
+  videoFiles?: string[]
+  links?: string[]
 }
 
 export type Tutorial = {
@@ -19,6 +21,7 @@ export type SoftwareResource = {
   category: string
   description: string
   url: string
+  links?: string[]
 }
 
 export type AppContent = {

@@ -1,32 +1,33 @@
 import { useState, type JSX } from 'react'
 
+import { getCategoryOptions } from '../utils/resources'
+
 import Card from '../components/ui/Card'
 import TextField from '../components/ui/TextField'
 import SelectField from '../components/ui/SelectField'
 
-import type { SoftwareResource } from '../types/resources'
+import Button from '../components/ui/Button'
+import Tabs from '../components/ui/Tabs'
+import ResourceEditor from '../components/editor/ResourceEditor'
+import type { AppContent, SoftwareResource } from '../types/resources'
 
 type SoftwarePageProps = {
-  software: SoftwareResource[]
+  content: AppContent
+  onSave: (content: AppContent) => Promise<void>
 }
 
-export default function SoftwarePage({ software }: SoftwarePageProps): JSX.Element {
-  const categoryOptions = [
-    { value: 'all', label: 'All categories' },
-    ...Array.from(new Set(software.map((item) => item.category))).map((category) => ({
-      value: category,
-      label: category
-    }))
-  ]
+export default function SoftwarePage({ content, onSave }: SoftwarePageProps): JSX.Element {
+  const { software } = content
+  const [draft, setDraft] = useState<SoftwareResource | null | undefined>(undefined)
+  const [tab, setTab] = useState('')
+  const categoryOptions = getCategoryOptions(software)
 
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('all')
 
-  // Keep your existing filtering logic and JSX below.
+  const query = search.trim().toLowerCase()
 
   const filteredSoftware = software.filter((item) => {
-    const query = search.trim().toLowerCase()
-
     const matchesCategory = category === 'all' || item.category === category
 
     const matchesSearch =
@@ -60,22 +61,59 @@ export default function SoftwarePage({ software }: SoftwarePageProps): JSX.Eleme
         />
       </div>
 
-      <div className="software-grid">
-        {filteredSoftware.map((item) => (
-          <Card key={item.id} title={item.name} description={item.description}>
-            <span className="resource-category">{item.category}</span>
-
-            <a
-              className="resource-action"
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Website ↗
-            </a>
-          </Card>
-        ))}
+      <div className="resource-add">
+        <Button onClick={() => setDraft(null)}>Add software</Button>
       </div>
+      {draft !== undefined && (
+        <ResourceEditor
+          key={draft?.id ?? 'new'}
+          kind="software"
+          item={draft}
+          content={content}
+          onSave={onSave}
+          onClose={() => setDraft(undefined)}
+        />
+      )}
+      <Tabs
+        label="Software categories"
+        value={tab}
+        onChange={setTab}
+        items={[...new Set(filteredSoftware.map((item) => item.category))].map((categoryName) => ({
+          id: categoryName,
+          label: categoryName,
+          content: (
+            <div className="software-grid">
+              {filteredSoftware
+                .filter((item) => item.category === categoryName)
+                .map((item) => (
+                  <Card
+                    key={item.id}
+                    title={item.name}
+                    description={item.description}
+                    action={
+                      <Button variant="secondary" onClick={() => setDraft(item)}>
+                        Edit
+                      </Button>
+                    }
+                  >
+                    <span className="resource-category">{item.category}</span>
+                    {(item.links ?? [item.url]).map((link, index) => (
+                      <a
+                        key={index}
+                        className="resource-action"
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {index === 0 ? 'Open Website' : `Website ${index + 1}`}
+                      </a>
+                    ))}
+                  </Card>
+                ))}
+            </div>
+          )
+        }))}
+      />
 
       {filteredSoftware.length === 0 && (
         <p className="resource-muted">No software matches your search.</p>

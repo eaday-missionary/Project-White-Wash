@@ -9,10 +9,10 @@ import PlaceholderPage from './pages/PlaceholderPage'
 import UIPlaygroundPage from './pages/UIPlaygroundPage'
 import TutorialsPage from './pages/TutorialsPage'
 import SoftwarePage from './pages/SoftwarePage'
-import ContentEditorPage from './pages/ContentEditorPage'
 
 import defaultTutorials from './data/tutorials.json'
 import defaultSoftware from './data/software.json'
+import { additionalPages } from './data/placeholderPages'
 
 import type { AppContent } from './types/resources'
 
@@ -87,13 +87,10 @@ function App(): JSX.Element {
         return <DashboardPage onNavigate={setCurrentPage} />
 
       case 'tutorials':
-        return <TutorialsPage tutorials={content.tutorials} />
+        return <TutorialsPage content={content} onSave={saveContent} />
 
       case 'software':
-        return <SoftwarePage software={content.software} />
-
-      case 'editor':
-        return <ContentEditorPage content={content} onSave={saveContent} />
+        return <SoftwarePage content={content} onSave={saveContent} />
 
       case 'playground':
         return <UIPlaygroundPage />
@@ -103,6 +100,17 @@ function App(): JSX.Element {
           <PlaceholderPage
             title={pageDetails.planner.title}
             description={pageDetails.planner.description}
+            onReturn={() => setCurrentPage('dashboard')}
+          />
+        )
+      case 'tree-of-wisdom':
+      case 'vault':
+      case 'tech-support':
+      case 'media-repository':
+      case 'secret-scrolls':
+        return (
+          <PlaceholderPage
+            title={additionalPages[currentPage]}
             onReturn={() => setCurrentPage('dashboard')}
           />
         )
