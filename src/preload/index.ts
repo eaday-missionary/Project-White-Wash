@@ -32,9 +32,10 @@ const api = {
       return (): void => {
         ipcRenderer.removeListener('window:maximized-change', listener)
       }
-    },
+    }
   },
   content: {
+    importVideo: (): Promise<string | null> => ipcRenderer.invoke('content:import-video'),
     load: (): Promise<unknown> => {
       return ipcRenderer.invoke('content:load')
     },

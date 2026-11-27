@@ -13,7 +13,6 @@ import icon from '../../resources/icon.png?asset'
 
 import { registerContentHandlers } from './contentStore'
 
-
 function getRequestWindow(event: IpcMainEvent | IpcMainInvokeEvent): BrowserWindow | null {
   const requestWindow = BrowserWindow.fromWebContents(event.sender)
 
@@ -111,9 +110,6 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
-
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
 
   registerWindowControls()
 

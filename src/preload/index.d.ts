@@ -15,6 +15,7 @@ declare global {
       }
 
       content: {
+        importVideo: () => Promise<string | null>
         load: () => Promise<AppContent | null>
         save: (content: AppContent) => Promise<void>
       }
